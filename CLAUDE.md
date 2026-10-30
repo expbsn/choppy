@@ -155,6 +155,10 @@ Games pull from the current week's content and each user's weak items.
 ## 8. Repository notes (kept up to date by Claude)
 
 - Xcode project `choppy.xcodeproj` (Xcode 26, file-system-synchronized groups), targets `choppy`, `choppyTests`, `choppyUITests`. Bundle ID `chop.app.choppy`, deployment target iOS 26.0, Swift default actor isolation = MainActor, approachable concurrency on.
-- CloudKit + push (`remote-notification`) capabilities are already enabled in the entitlements; the iCloud container identifier is not yet set.
-- Fonts live in `CluadeAssets/Fonts/` (folder name as created; brief refers to it as `ClaudeAssets`). Currently contains **`NotoSansJP-VariableFont_wght.ttf`** (Noto Sans JP, variable weight) – so Japanese glyphs *are* covered by the accent font.
-- Architecture decisions and their reasons: see `DECISIONS.md` (created once the plan is confirmed).
+- CloudKit + push (`remote-notification`) capabilities are enabled in the entitlements. Planned iCloud container: `iCloud.chop.app.choppy`.
+- Font: **Noto Sans JP** variable (`choppy/Resources/Fonts/NotoSansJP-VariableFont_wght.ttf`, weights 100–900, family "Noto Sans JP"), registered via `UIAppFonts`. It covers Japanese glyphs, so no extra JP font is needed.
+- **Confirmed decisions (2026-10-30):** German UI (development region `de`, String Catalog). Paid developer account. Both devices support Apple Intelligence. Kokoro TTS is **bundled** in the app.
+- **Architecture:** see `DECISIONS.md`. In short: SwiftData (private) + CKSyncEngine with a zone-wide CKShare (pair space). Pure logic lives in the local package `Packages/ChoppyCore`. FSRS-6 is our own implementation. No third-party packages.
+- **Layout:** `choppy/{App, DesignSystem, Features, Persistence, Services, Resources}`, `Packages/ChoppyCore`, `Tools/ContentPipeline` (planned).
+- **Phase status:** Phase 1, step 1 (project structure) is done. Next: step 2, the design system.
+- **Commands:** `swift test --package-path Packages/ChoppyCore`; `xcodebuild -project choppy.xcodeproj -scheme choppy -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build`.

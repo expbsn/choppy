@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A1C0DE000000000000000001 /* ChoppyCore in Frameworks */ = {isa = PBXBuildFile; productRef = A1C0DE000000000000000003 /* ChoppyCore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7793D657309514B300A565CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1C0DE000000000000000001 /* ChoppyCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = choppy;
 			packageProductDependencies = (
+				A1C0DE000000000000000003 /* ChoppyCore */,
 			);
 			productName = choppy;
 			productReference = 7793D645309514B000A565CA /* choppy.app */;
@@ -200,14 +206,17 @@
 				};
 			};
 			buildConfigurationList = 7793D640309514B000A565CA /* Build configuration list for PBXProject "choppy" */;
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				de,
 				Base,
 			);
 			mainGroup = 7793D63C309514B000A565CA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A1C0DE000000000000000002 /* XCLocalSwiftPackageReference "Packages/ChoppyCore" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7793D646309514B000A565CA /* Products */;
 			projectDirPath = "";
@@ -595,6 +604,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A1C0DE000000000000000002 /* XCLocalSwiftPackageReference "Packages/ChoppyCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ChoppyCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1C0DE000000000000000003 /* ChoppyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ChoppyCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7793D63D309514B000A565CA /* Project object */;
 }

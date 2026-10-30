@@ -6,7 +6,7 @@ Two learners study the same weekly vocabulary, kanji and grammar in sync, each w
 
 ## Status
 
-Phase 0 – project setup and planning. See [`CLAUDE.md`](CLAUDE.md) for the full product brief and [`DECISIONS.md`](DECISIONS.md) (coming soon) for architecture decisions.
+Phase 1 (Foundation) – project structure in place. See [`CLAUDE.md`](CLAUDE.md) for the full product brief and [`DECISIONS.md`](DECISIONS.md) for architecture decisions.
 
 ## Requirements
 
@@ -17,3 +17,15 @@ Phase 0 – project setup and planning. See [`CLAUDE.md`](CLAUDE.md) for the ful
 ## Getting started
 
 Open `choppy.xcodeproj` in Xcode and run the `choppy` scheme.
+
+## Project layout
+
+- `choppy/` – app target (App, Features, DesignSystem, Persistence, Services, Resources)
+- `Packages/ChoppyCore/` – pure Swift domain logic (SRS, kana, content model, game rules)
+- `Tools/ContentPipeline/` – offline content builder (planned)
+
+## Tests
+
+```bash
+swift test --package-path Packages/ChoppyCore
+```
