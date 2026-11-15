@@ -1,0 +1,21 @@
+{
+  "formatVersion": 1,
+  "contentVersion": 1,
+  "topics": [
+    { "id": "greetings", "title": "Begrüßungen", "japanese": "挨拶", "symbol": "hand.wave" }
+  ],
+  "vocab": [
+    { "id": "vocab:choppy:konnichiwa", "surface": "こんにちは", "reading": "こんにちは", "meanings": ["Hallo", "Guten Tag"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:ohayougozaimasu", "surface": "おはようございます", "reading": "おはようございます", "meanings": ["Guten Morgen"], "topic": "greetings", "difficulty": 1, "jlpt": 5, "note": "höflich; unter Freunden: おはよう" },
+    { "id": "vocab:choppy:konbanwa", "surface": "こんばんは", "reading": "こんばんは", "meanings": ["Guten Abend"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:sayounara", "surface": "さようなら", "reading": "さようなら", "meanings": ["Auf Wiedersehen"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:oyasuminasai", "surface": "おやすみなさい", "reading": "おやすみなさい", "meanings": ["Gute Nacht"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:arigatou", "surface": "ありがとう", "reading": "ありがとう", "meanings": ["Danke"], "topic": "greetings", "difficulty": 1, "jlpt": 5, "note": "höflicher: ありがとうございます" },
+    { "id": "vocab:choppy:sumimasen", "surface": "すみません", "reading": "すみません", "meanings": ["Entschuldigung", "Verzeihung"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:hai", "surface": "はい", "reading": "はい", "meanings": ["Ja"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:iie", "surface": "いいえ", "reading": "いいえ", "meanings": ["Nein"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },
+    { "id": "vocab:choppy:itadakimasu", "surface": "いただきます", "reading": "いただきます", "meanings": ["Guten Appetit"], "topic": "greetings", "difficulty": 1, "note": "vor dem Essen" },
+    { "id": "vocab:choppy:gochisousamadeshita", "surface": "ごちそうさまでした", "reading": "ごちそうさまでした", "meanings": ["Danke für das Essen"], "topic": "greetings", "difficulty": 2, "note": "nach dem Essen" },
+    { "id": "vocab:choppy:ogenkidesuka", "surface": "お元気ですか", "reading": "おげんきですか", "furigana": [{ "text": "お" }, { "text": "元気", "reading": "げんき" }, { "text": "ですか" }], "meanings": ["Wie geht es dir?", "Wie geht es Ihnen?"], "topic": "greetings", "difficulty": 2, "jlpt": 5 }
+  ]
+}

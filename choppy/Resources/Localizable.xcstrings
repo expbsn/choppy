@@ -1,7 +1,338 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
+    "%@" : {
 
+    },
+    "%@, %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "%lld Wörter" : {
+
+    },
+    "%lld Zeichen" : {
+
+    },
+    "12 neue Wörter · 3 Kanji" : {
+
+    },
+    "Abgeschlossen: %lld" : {
+
+    },
+    "Achtung, Blätter" : {
+
+    },
+    "Ahornblatt dunkelbraun" : {
+
+    },
+    "Ahornblatt hellbraun" : {
+
+    },
+    "Ahornblatt rot" : {
+
+    },
+    "Akzent – Buttons, Fortschritt" : {
+
+    },
+    "Akzent hell – Markierungen" : {
+
+    },
+    "Akzentschrift" : {
+
+    },
+    "Alle Bausteine auf einen Blick" : {
+
+    },
+    "Alle Farben, Hintergrund und Schrift zurücksetzen?" : {
+
+    },
+    "Alles zurücksetzen" : {
+
+    },
+    "Asanoha 麻の葉" : {
+
+    },
+    "Auf Standard zurücksetzen" : {
+
+    },
+    "Bambus – Tab-Leiste" : {
+
+    },
+    "Beschriftung" : {
+
+    },
+    "Bilder" : {
+
+    },
+    "Buttons" : {
+
+    },
+    "Choppy" : {
+
+    },
+    "Choppy steht auf den Schultern vieler großzügiger Projekte. Danke!" : {
+
+    },
+    "Choppy: %@" : {
+
+    },
+    "Credits & Lizenzen" : {
+
+    },
+    "Denkt nach" : {
+
+    },
+    "Design-Galerie" : {
+
+    },
+    "Diese Woche" : {
+
+    },
+    "Display" : {
+
+    },
+    "Einstellungen" : {
+
+    },
+    "Farben" : {
+
+    },
+    "Farben & Stil" : {
+
+    },
+    "Farben, Hintergrund und Schrift anpassen" : {
+
+    },
+    "Feiert" : {
+
+    },
+    "Feuert an" : {
+
+    },
+    "Fließtext in SF Pro" : {
+
+    },
+    "Fröhlich" : {
+
+    },
+    "Fußspuren-Pfad" : {
+
+    },
+    "Grundzeichen" : {
+
+    },
+    "Herausfordern" : {
+
+    },
+    "Hier ladet ihr euch bald gegenseitig ein und vergleicht eure Fortschritte." : {
+
+    },
+    "Hier tretet ihr bald gegeneinander an." : {
+
+    },
+    "Hintergrund" : {
+
+    },
+    "Hintergrund – Waldgrün" : {
+
+    },
+    "Hiragana" : {
+
+    },
+    "Holz – Rahmen, Buttons, Blätter" : {
+
+    },
+    "Holz dunkel – Äste, Schatten" : {
+
+    },
+    "Hungrig" : {
+
+    },
+    "Japanische Schrift (Kana, Kanji, Furigana)" : {
+
+    },
+    "Jede Woche hinterlässt Choppy hier eine neue Fußspur – von unten nach oben." : {
+
+    },
+    "Kana-Tabelle" : {
+
+    },
+    "Karten" : {
+
+    },
+    "Katakana" : {
+
+    },
+    "Kikkō 亀甲" : {
+
+    },
+    "Kombinationen" : {
+
+    },
+    "Kopiert ✓" : {
+
+    },
+    "Lernen" : {
+
+    },
+    "Lernen starten" : {
+
+    },
+    "Lerninhalte" : {
+
+    },
+    "Mit Dakuten ゛ und Handakuten ゜" : {
+
+    },
+    "Momiji 紅葉" : {
+
+    },
+    "Muster" : {
+
+    },
+    "Musterstärke" : {
+
+    },
+    "Noch keine Spiele" : {
+
+    },
+    "Papier dunkel – Flächen, Hügel, Blätter" : {
+
+    },
+    "Papierstruktur" : {
+
+    },
+    "Pfad" : {
+
+    },
+    "Richtig" : {
+
+    },
+    "Satt" : {
+
+    },
+    "Schläft" : {
+
+    },
+    "Schlicht" : {
+
+    },
+    "Schrift" : {
+
+    },
+    "Schriften" : {
+
+    },
+    "Seigaiha 青海波" : {
+
+    },
+    "Shippō 七宝" : {
+
+    },
+    "Später" : {
+
+    },
+    "Spiele" : {
+
+    },
+    "Sprachausgabe" : {
+
+    },
+    "Stempel" : {
+
+    },
+    "Stempel %@" : {
+
+    },
+    "Stempel entfernen" : {
+
+    },
+    "Stempel-Zinnober" : {
+
+    },
+    "Stempeln" : {
+
+    },
+    "Stimmung" : {
+
+    },
+    "Themen" : {
+
+    },
+    "Tinte – Text, Konturen" : {
+
+    },
+    "Tinte hell – Nebentext" : {
+
+    },
+    "Titel" : {
+
+    },
+    "Traurig" : {
+
+    },
+    "Typografie" : {
+
+    },
+    "Überschrift" : {
+
+    },
+    "Überschriften und Akzente" : {
+
+    },
+    "Überschriften, Buttons und Beschriftungen. Japanisch bleibt in Noto Sans JP." : {
+
+    },
+    "Werte kopieren" : {
+
+    },
+    "Werte teilen" : {
+
+    },
+    "Willkommen! Fangt mit den Kana an." : {
+
+    },
+    "Wir" : {
+
+    },
+    "Woche %lld von %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Woche %1$lld von %2$lld"
+          }
+        }
+      }
+    },
+    "z" : {
+
+    },
+    "Zurück" : {
+
+    },
+    "Zurücksetzen" : {
+
+    },
+    "いただきます・日本語" : {
+
+    },
+    "いらっしゃいませ！" : {
+
+    },
+    "こんにちは" : {
+
+    }
   },
   "version" : "1.0"
 }
