@@ -4,14 +4,18 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NotoSansJP-VariableFont_wght.ttf</string>
-		<string>Teko-VariableFont_wght.ttf</string>
+		<string>ZenMaruGothic-Regular.ttf</string>
+		<string>ZenMaruGothic-Medium.ttf</string>
+		<string>YujiBoku-Regular.ttf</string>
+		<string>YujiSyuku-Regular.ttf</string>
+		<string>DMMono-Regular.ttf</string>
+		<string>DMMono-Medium.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
+	<string>Dark</string>
 </dict>
 </plist>

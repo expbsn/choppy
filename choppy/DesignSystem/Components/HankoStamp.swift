@@ -17,7 +17,7 @@ struct HankoStamp: View {
                 .padding(size * 0.1)
             characters
         }
-        .foregroundStyle(.hanko)
+        .foregroundStyle(.chochin)
         .frame(width: size, height: size)
         .mask { InkSpeckleMask() }
         .rotationEffect(.degrees(-7))
@@ -45,7 +45,7 @@ struct HankoStamp: View {
             ForEach(Array(columns.reversed().enumerated()), id: \.offset) { _, column in
                 VStack(spacing: -size * 0.04) {
                     ForEach(Array(column.enumerated()), id: \.offset) { _, char in
-                        Text(char).font(.choppyJapanese(glyphSize, weight: .black))
+                        Text(brush: char, size: glyphSize).dynamicTypeSize(.large)
                     }
                 }
             }
@@ -79,7 +79,7 @@ private struct InkSpeckleMask: View {
             HankoStamp(text: "完", size: 56, isStamped: stamped)
             HankoStamp(text: "毎日練習", size: 88, isStamped: stamped)
         }
-        Button("Stempeln") { stamped.toggle() }.buttonStyle(.ink(.secondary))
+        Button("Stempeln") { stamped.toggle() }.buttonStyle(.choppy(.plank))
     }
     .padding()
     .background { AppBackground() }

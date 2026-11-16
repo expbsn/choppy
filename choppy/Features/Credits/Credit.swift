@@ -41,22 +41,40 @@ extension Credit {
     /// Every attribution shown on the Credits screen. Extend this whenever new material is bundled.
     static let all: [Credit] = [
         Credit(
-            name: "Noto Sans JP",
+            name: "Zen Maru Gothic",
             category: .fonts,
-            usage: "Japanische Schrift (Kana, Kanji, Furigana)",
-            copyright: "© 2014–2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
+            usage: "Überschriften, Texte und japanische Lesungen",
+            copyright: "© 2021 The Zen Maru Gothic Project Authors (https://github.com/googlefonts/zen-marugothic)",
             license: "SIL Open Font License 1.1",
             licenseURL: URL(string: "https://openfontlicense.org")!,
-            licenseFile: "OFL-NotoSansJP"
+            licenseFile: "OFL-ZenMaruGothic"
         ),
         Credit(
-            name: "Teko",
+            name: "Yuji Boku",
             category: .fonts,
-            usage: "Überschriften und Akzente",
-            copyright: "© 2023 The Teko Project Authors (https://www.github.com/googlefonts/teko)",
+            usage: "Pinselschrift für Kanji",
+            copyright: "© 2021 The Yuji Project Authors (https://github.com/Kinutafontfactory/Yuji)",
             license: "SIL Open Font License 1.1",
             licenseURL: URL(string: "https://openfontlicense.org")!,
-            licenseFile: "OFL-Teko"
+            licenseFile: "OFL-YujiBoku"
+        ),
+        Credit(
+            name: "Yuji Syuku",
+            category: .fonts,
+            usage: "Pinselschrift für Hiragana und Katakana",
+            copyright: "© 2021 The Yuji Project Authors (https://github.com/Kinutafontfactory/Yuji)",
+            license: "SIL Open Font License 1.1",
+            licenseURL: URL(string: "https://openfontlicense.org")!,
+            licenseFile: "OFL-YujiSyuku"
+        ),
+        Credit(
+            name: "DM Mono",
+            category: .fonts,
+            usage: "Zahlen und kleine Beschriftungen",
+            copyright: "© 2020 The DM Mono Project Authors (https://www.github.com/googlefonts/dm-mono)",
+            license: "SIL Open Font License 1.1",
+            licenseURL: URL(string: "https://openfontlicense.org")!,
+            licenseFile: "OFL-DMMono"
         ),
     ]
 }

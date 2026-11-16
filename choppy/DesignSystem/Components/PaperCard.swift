@@ -1,37 +1,68 @@
 import SwiftUI
 
-/// A sheet of lighter paper lying on the washi background. The default container for content blocks.
+/// A sheet of paper in a wooden frame ("Speisetafel" in Figma), like the menu boards in the alley.
+/// The default container for content blocks; text on it is ink-dark.
 struct PaperCard<Content: View>: View {
-    var padding: CGFloat = Spacing.m
-    var lifted = false
+    var padding: CGFloat = Spacing.s
     @ViewBuilder var content: Content
 
     var body: some View {
         content
             .padding(padding)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.card, in: .rect(cornerRadius: Radius.m))
-            .overlay {
-                RoundedRectangle(cornerRadius: Radius.m)
-                    .strokeBorder(Color.woodDark.opacity(0.15), lineWidth: 1)
+            .foregroundStyle(.sumi)
+            .background(Color.washi100)
+            .padding(4)
+            .background(Color.sugi400, in: .rect(cornerRadius: Radius.s))
+            .padding(1.5)
+            .background(Color.sumi, in: .rect(cornerRadius: Radius.s + 1.5))
+    }
+}
+
+/// A small board with a title, a count and a thin progress line, e.g. "Hiragana, 46 von 104".
+struct ProgressBoard: View {
+    var title: LocalizedStringKey
+    var done: Int
+    var total: Int
+
+    var body: some View {
+        PaperCard {
+            VStack(alignment: .leading, spacing: Spacing.xxs) {
+                Text(title).font(.choppyAccent(15, relativeTo: .subheadline)).lineLimit(1).minimumScaleFactor(0.8)
+                Text("\(done) von \(total)").font(.choppyCaption).foregroundStyle(.sugi400)
+                GeometryReader { proxy in
+                    Color.sumi.opacity(0.15)
+                        .overlay(alignment: .leading) {
+                            Color.sumi.frame(width: proxy.size.width * fraction)
+                        }
+                }
+                .frame(height: 4)
+                .padding(.vertical, Spacing.xxs)
             }
-            .paperShadow(lifted: lifted)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private var fraction: CGFloat {
+        total > 0 ? min(max(CGFloat(done) / CGFloat(total), 0), 1) : 0
     }
 }
 
 #Preview {
-    VStack(spacing: Spacing.m) {
-        PaperCard {
-            VStack(alignment: .leading, spacing: Spacing.xs) {
-                Text("Diese Woche").font(.choppyHeadline)
-                Text("12 neue Vokabeln · 3 Kanji").foregroundStyle(.inkSoft)
+    VStack(spacing: Spacing.s) {
+        PaperCard(padding: Spacing.m) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Wort des Tages").font(.choppyCaption).foregroundStyle(.sugi400)
+                Text("そば").font(.choppyTitle)
+                Text("Buchweizennudeln").font(.choppyBody)
             }
         }
-        PaperCard(lifted: true) {
-            Text("ありがとう").font(.choppyJapanese(32))
+        HStack(spacing: Spacing.s) {
+            ProgressBoard(title: "Hiragana", done: 46, total: 104)
+            ProgressBoard(title: "Wörter der Woche", done: 8, total: 20)
         }
     }
-    .foregroundStyle(.ink)
     .padding()
+    .frame(maxHeight: .infinity)
     .background { AppBackground() }
 }

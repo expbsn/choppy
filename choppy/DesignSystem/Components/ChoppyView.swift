@@ -57,24 +57,24 @@ private struct ChoppyPlaceholder: View {
         Canvas { context, size in
             let s = min(size.width, size.height)
             let body = CGRect(x: s * 0.08, y: s * 0.12, width: s * 0.84, height: s * 0.8)
-            context.fill(Path(ellipseIn: body), with: .color(.wood))
+            context.fill(Path(ellipseIn: body), with: .color(.sugi400))
             context.stroke(Path(ellipseIn: body.insetBy(dx: -s * 0.03, dy: -s * 0.03)),
-                           with: .color(.woodDark.opacity(0.4)),
+                           with: .color(.washi300.opacity(0.5)),
                            style: StrokeStyle(lineWidth: 1.5, dash: [4, 4]))
 
             // Ears
             for x in [0.22, 0.78] {
                 let ear = CGRect(x: s * x - s * 0.1, y: s * 0.06, width: s * 0.2, height: s * 0.2)
-                context.fill(Path(ellipseIn: ear), with: .color(.woodDark))
+                context.fill(Path(ellipseIn: ear), with: .color(.sugi600))
             }
 
             // Cheeks
             for x in [0.27, 0.73] {
                 let cheek = CGRect(x: s * x - s * 0.07, y: s * 0.58, width: s * 0.14, height: s * 0.08)
-                context.fill(Path(ellipseIn: cheek), with: .color(.hanko.opacity(0.35)))
+                context.fill(Path(ellipseIn: cheek), with: .color(.chochin.opacity(0.45)))
             }
 
-            let ink = GraphicsContext.Shading.color(.ink)
+            let ink = GraphicsContext.Shading.color(.sumi)
             let line = StrokeStyle(lineWidth: s * 0.035, lineCap: .round)
 
             // Eyes
@@ -115,7 +115,7 @@ private struct ChoppyPlaceholder: View {
             context.stroke(mouth, with: ink, style: line)
 
             if mood == .sleeping {
-                context.draw(Text("z").font(.choppyAccent(s * 0.16)).foregroundStyle(.inkSoft), at: CGPoint(x: s * 0.86, y: s * 0.16))
+                context.draw(Text("z").font(.choppyAccent(s * 0.16)).foregroundStyle(.washi300), at: CGPoint(x: s * 0.86, y: s * 0.16))
             }
         }
     }

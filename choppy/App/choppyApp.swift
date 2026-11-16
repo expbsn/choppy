@@ -16,7 +16,7 @@ struct choppyApp: App {
         WindowGroup {
             RootTabView()
                 .environment(\.content, content)
-                .preferredColorScheme(.light)
+                .preferredColorScheme(.dark)
         }
     }
 }

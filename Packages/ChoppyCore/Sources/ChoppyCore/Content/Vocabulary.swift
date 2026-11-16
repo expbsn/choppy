@@ -57,4 +57,6 @@ public struct Topic: Identifiable, Hashable, Sendable, Codable {
     public let japanese: String
     /// SF Symbol name shown next to the topic.
     public let symbol: String
+    /// Kana reading of `japanese`, if it contains kanji.
+    public var reading: String? = nil
 }

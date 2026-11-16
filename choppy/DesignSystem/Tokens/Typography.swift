@@ -1,83 +1,89 @@
 import SwiftUI
 
-/// Font weights used by Choppy. Each bundled family maps them to its own named instances.
-///
-/// The variable fonts expose named instances with fixed PostScript names
-/// (`NotoSansJP-Thin_<Weight>`, `Teko-Light_<Weight>`); using them directly is
-/// the most reliable way to pick a weight from a variable font.
+/// The two weights bundled for Zen Maru Gothic and DM Mono.
 nonisolated enum ChoppyFontWeight: String, CaseIterable, Sendable {
-    case light = "Light"
     case regular = "Regular"
     case medium = "Medium"
-    case semibold = "SemiBold"
-    case bold = "Bold"
-    case black = "Black"
 
-    var notoSansJPName: String { "NotoSansJP-Thin_\(rawValue)" }
-
-    /// Teko goes from Light to Bold; Black falls back to Bold.
-    var tekoName: String {
-        switch self {
-        case .light: "Teko-Light"
-        case .black: "Teko-Light_Bold"
-        default: "Teko-Light_\(rawValue)"
-        }
-    }
+    var zenMaruGothicName: String { "ZenMaruGothic-\(rawValue)" }
+    var dmMonoName: String { "DMMono-\(rawValue)" }
 }
 
-extension AccentFontFamily {
-    func postScriptName(_ weight: ChoppyFontWeight) -> String {
-        switch self {
-        case .teko: weight.tekoName
-        case .notoSansJP: weight.notoSansJPName
-        }
-    }
+/// The brush fonts: Yuji Boku for kanji, Yuji Syuku for kana.
+nonisolated enum BrushFont {
+    static let kanjiName = "YujiBoku-Regular"
+    static let kanaName = "YujiSyuku-Regular"
 
-    /// Teko is condensed with a small x-height, so it is set larger to match Noto's visual size.
-    var sizeScale: CGFloat {
-        switch self {
-        case .teko: 1.3
-        case .notoSansJP: 1
-        }
+    /// Hiragana and katakana, including the long-vowel mark.
+    static func isKana(_ character: Character) -> Bool {
+        character.unicodeScalars.allSatisfy { (0x3040...0x30FF).contains($0.value) }
     }
 }
 
 extension Font {
-    /// Accent font for headings and playful labels (Teko or Noto Sans JP, chosen in the theme editor).
+    /// Interface font (Zen Maru Gothic): titles, labels, body text and Japanese readings.
     /// Scales with Dynamic Type relative to `textStyle`.
-    static func choppyAccent(_ size: CGFloat, weight: ChoppyFontWeight = .bold, relativeTo textStyle: TextStyle = .body) -> Font {
-        let family = ThemeStore.shared.settings.accentFont
-        return .custom(family.postScriptName(weight), size: size * family.sizeScale, relativeTo: textStyle)
+    static func choppyAccent(_ size: CGFloat, weight: ChoppyFontWeight = .medium, relativeTo textStyle: TextStyle = .body) -> Font {
+        .custom(weight.zenMaruGothicName, size: size, relativeTo: textStyle)
     }
 
-    /// Font for kana, kanji and furigana: always Noto Sans JP, which covers all Japanese characters.
+    /// Japanese running text and readings. Zen Maru Gothic covers kana and kanji.
     static func choppyJapanese(_ size: CGFloat, weight: ChoppyFontWeight = .regular, relativeTo textStyle: TextStyle = .body) -> Font {
-        .custom(weight.notoSansJPName, size: size, relativeTo: textStyle)
+        .custom(weight.zenMaruGothicName, size: size, relativeTo: textStyle)
     }
 
-    // MARK: Scale
+    /// Small data labels (DM Mono): counts, dates, captions.
+    static func choppyMono(_ size: CGFloat = 12, weight: ChoppyFontWeight = .regular, relativeTo textStyle: TextStyle = .caption) -> Font {
+        .custom(weight.dmMonoName, size: size, relativeTo: textStyle)
+    }
 
-    static var choppyDisplay: Font { choppyAccent(34, weight: .black, relativeTo: .largeTitle) }
-    static var choppyTitle: Font { choppyAccent(24, weight: .bold, relativeTo: .title2) }
-    static var choppyHeadline: Font { choppyAccent(18, weight: .semibold, relativeTo: .headline) }
-    static var choppyCaption: Font { choppyAccent(13, weight: .medium, relativeTo: .caption) }
+    /// Brush font for kanji (Yuji Boku). For mixed kanji and kana use `Text(brush:size:)`.
+    static func choppyBrush(_ size: CGFloat, relativeTo textStyle: TextStyle = .title) -> Font {
+        .custom(BrushFont.kanjiName, size: size, relativeTo: textStyle)
+    }
+
+    /// Brush font for kana (Yuji Syuku).
+    static func choppyBrushKana(_ size: CGFloat, relativeTo textStyle: TextStyle = .title) -> Font {
+        .custom(BrushFont.kanaName, size: size, relativeTo: textStyle)
+    }
+
+    // MARK: Scale (sizes from the Figma board "02 Schrift")
+
+    static var choppyDisplay: Font { choppyAccent(28, relativeTo: .largeTitle) }
+    static var choppyTitle: Font { choppyAccent(20, relativeTo: .title3) }
+    static var choppyHeadline: Font { choppyAccent(16, relativeTo: .headline) }
+    static var choppyBody: Font { choppyAccent(15, weight: .regular, relativeTo: .body) }
+    static var choppyFootnote: Font { choppyAccent(13, weight: .regular, relativeTo: .footnote) }
+    static var choppyCaption: Font { choppyMono(12) }
+}
+
+extension Text {
+    /// Japanese text in the brush fonts: kanji in Yuji Boku, kana in Yuji Syuku.
+    init(brush string: String, size: CGFloat, relativeTo textStyle: Font.TextStyle = .title) {
+        var result = AttributedString()
+        for character in string {
+            var part = AttributedString(String(character))
+            part.font = BrushFont.isKana(character)
+                ? .choppyBrushKana(size, relativeTo: textStyle)
+                : .choppyBrush(size, relativeTo: textStyle)
+            result += part
+        }
+        self.init(result)
+    }
 }
 
 #Preview("Typografie") {
     VStack(alignment: .leading, spacing: Spacing.s) {
-        Text("Choppy").font(.choppyDisplay)
-        Text("Diese Woche").font(.choppyTitle)
-        Text("Begrüßungen").font(.choppyHeadline)
-        Text("Fließtext bleibt in SF – gut lesbar.").font(.body)
-        Text("3 von 5 Lektionen").font(.choppyCaption).foregroundStyle(.inkSoft)
-        Divider()
-        Text("日本語を勉強しましょう").font(.choppyJapanese(28))
-        HStack {
-            ForEach(ChoppyFontWeight.allCases, id: \.self) { weight in
-                Text("あ").font(.choppyJapanese(24, weight: weight))
-            }
-        }
+        Text("Wortschatz").font(.choppyDisplay)
+        Text("Wörter der Woche").font(.choppyTitle)
+        Text("Weiter lernen").font(.choppyHeadline)
+        Text("Fließtext in Zen Maru Gothic.").font(.choppyBody)
+        Text("Woche 3 · 8 von 20").font(.choppyCaption).foregroundStyle(.washi300)
+        Text(brush: "蕎麦を食べる", size: 40)
+        Text("日本語を勉強しましょう").font(.choppyJapanese(20))
     }
-    .foregroundStyle(.ink)
+    .foregroundStyle(.washi50)
     .padding()
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background { AppBackground() }
 }

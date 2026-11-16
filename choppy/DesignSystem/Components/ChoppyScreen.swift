@@ -1,28 +1,32 @@
 import SwiftUI
 
-/// Frame for every screen: the shared app background and a custom header in place of the
-/// system navigation bar – a small vermilion seal with the Japanese name, the title, and a brush stroke.
-/// Push destinations pass `showsBack: true` to get the wooden back button.
-struct ChoppyScreen<Content: View, Trailing: View>: View {
-    let title: LocalizedStringKey
-    var japanese: String?
+/// Frame for every screen: the shared night background and a custom header in place of the
+/// system navigation bar – the title with an optional small caption below it, as on the Figma screens.
+/// Push destinations pass `showsBack: true` to get the plank back button. Screens that bring
+/// their own opening (the start screen) pass no title and get no header.
+///
+/// The header has no buttons on the right: that corner belongs to the maple and its lanterns.
+/// Content scrolling up starts to blur and darken a little below the header and has dissolved into
+/// the night behind the title. The maple corner is drawn in front of it and stays sharp.
+struct ChoppyScreen<Content: View>: View {
+    let title: LocalizedStringKey?
+    var subtitle: Text?
     var showsBack: Bool
     @ViewBuilder var content: Content
-    @ViewBuilder var trailing: Trailing
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bottomBarInset) private var bottomBarInset
+    /// How far below the header the blur and darkening already begin.
+    private let fadeReach: CGFloat = 48
 
-    init(_ title: LocalizedStringKey,
-         japanese: String? = nil,
+    init(_ title: LocalizedStringKey?,
+         subtitle: Text? = nil,
          showsBack: Bool = false,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder trailing: () -> Trailing) {
+         @ViewBuilder content: () -> Content) {
         self.title = title
-        self.japanese = japanese
+        self.subtitle = subtitle
         self.showsBack = showsBack
         self.content = content()
-        self.trailing = trailing()
     }
 
     var body: some View {
@@ -31,39 +35,83 @@ struct ChoppyScreen<Content: View, Trailing: View>: View {
             // Scroll content ends above the tab bar, while the page background still runs underneath it.
             .contentMargins(.bottom, bottomBarInset, for: .scrollContent)
             .contentMargins(.bottom, bottomBarInset, for: .scrollIndicators)
-            .safeAreaInset(edge: .top, spacing: 0) { header }
+            // The bar reaches `fadeReach` below the header (and content starts that much higher), so the
+            // system's soft edge blur begins early. The night veil in the bar darkens what is blurred.
+            .scrollEdgeEffectStyle(.soft, for: .top)
+            // At rest the content sits just below the fade, so its first line is clear.
+            .contentMargins(.top, title == nil ? 0 : fadeReach - Spacing.xxs, for: .scrollContent)
+            .safeAreaBar(edge: .top, spacing: title == nil ? 0 : -fadeReach) {
+                if let title {
+                    VStack(spacing: 0) {
+                        header(title)
+                        Color.clear.frame(height: fadeReach)
+                    }
+                    .background(alignment: .top) { veil }
+                }
+            }
+            .onAppear { LanternMotion.shared.push() }
             .background { AppBackground() }
-            .foregroundStyle(.ink)
+            .font(.choppyBody)
+            .foregroundStyle(.washi50)
             .toolbar(.hidden, for: .navigationBar)
     }
 
-    private var header: some View {
-        VStack(spacing: Spacing.xs) {
-            HStack(spacing: Spacing.s) {
-                if showsBack {
-                    WoodIconButton(systemImage: "chevron.left", label: "Zurück") { dismiss() }
-                }
-                if let japanese {
-                    SealLabel(text: japanese)
-                }
-                Text(title)
-                    .font(showsBack ? .choppyTitle : .choppyDisplay)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                    .accessibilityAddTraits(.isHeader)
-                Spacer(minLength: 0)
-                trailing
+    private func header(_ title: LocalizedStringKey) -> some View {
+        // The back button is centred on the title and its caption together.
+        HStack(alignment: .center, spacing: Spacing.s) {
+            if showsBack {
+                PlankIconButton(systemImage: "chevron.left", label: "Zurück") { dismiss() }
             }
-            BrushStroke()
-                .fill(Color.woodDark.opacity(0.55))
-                .frame(height: 5)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(title)
+                    .font(.choppyDisplay)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .accessibilityAddTraits(.isHeader)
+                subtitle?
+                    .font(.choppyCaption)
+                    .foregroundStyle(.washi300)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
+            }
+            Spacer(minLength: 0)
         }
-        .padding(.horizontal, Spacing.m)
-        .padding(.top, Spacing.xxs)
-        .padding(.bottom, Spacing.xs)
-        // The same background as the page, so the pattern runs on seamlessly (both start at the screen's
-        // top edge) while scrolled content disappears under the brush stroke.
-        .background { AppBackground() }
+        .foregroundStyle(.washi50)
+        .padding(.leading, Spacing.l)
+        // Title and caption end well before the branch and lanterns of the maple corner.
+        .padding(.trailing, MapleCorner.reservedWidth)
+        .padding(.top, Spacing.xs)
+        .padding(.bottom, Spacing.xxs)
+    }
+
+    /// What lies over scrolled content in the header zone, bottom to top:
+    /// a blur that grows towards the top (two frosted layers with fading masks, so it does not depend
+    /// on the system edge effect), a veil of night sky that thins out downwards, and the maple corner,
+    /// which therefore stays sharp.
+    private var veil: some View {
+        ZStack {
+            Rectangle().fill(.ultraThinMaterial)
+                .mask { fade(solidUntil: 0.55, clearAt: 1) }
+            Rectangle().fill(.regularMaterial)
+                .mask { fade(solidUntil: 0.3, clearAt: 0.78) }
+            LinearGradient(stops: [.init(color: SceneColor.skyTop, location: 0),
+                                   .init(color: SceneColor.skyTop, location: 0.26),
+                                   .init(color: SceneColor.skyTop.opacity(0.86), location: 0.42),
+                                   .init(color: SceneColor.skyTop.opacity(0.6), location: 0.58),
+                                   .init(color: SceneColor.skyTop.opacity(0.34), location: 0.74),
+                                   .init(color: SceneColor.skyTop.opacity(0.12), location: 0.9),
+                                   .init(color: SceneColor.skyTop.opacity(0), location: 1)],
+                           startPoint: .top, endPoint: .bottom)
+        }
+        .overlay(alignment: .topTrailing) { MapleCorner() }
+        .ignoresSafeArea(edges: .top)
+        .allowsHitTesting(false)
+    }
+
+    private func fade(solidUntil: CGFloat, clearAt: CGFloat) -> some View {
+        LinearGradient(stops: [.init(color: .black, location: 0), .init(color: .black, location: solidUntil),
+                               .init(color: .clear, location: clearAt)],
+                       startPoint: .top, endPoint: .bottom)
     }
 }
 
@@ -72,84 +120,12 @@ extension EnvironmentValues {
     @Entry var bottomBarInset: CGFloat = 0
 }
 
-extension ChoppyScreen where Trailing == EmptyView {
-    init(_ title: LocalizedStringKey, japanese: String? = nil, showsBack: Bool = false, @ViewBuilder content: () -> Content) {
-        self.init(title, japanese: japanese, showsBack: showsBack, content: content, trailing: { EmptyView() })
-    }
-}
-
-/// A small filled vermilion seal with up to two characters stacked vertically, used next to titles.
-struct SealLabel: View {
-    var text: String
-    var size: CGFloat = 34
-
-    var body: some View {
-        let chars = Array(text.prefix(2)).map(String.init)
-        VStack(spacing: -size * 0.08) {
-            ForEach(Array(chars.enumerated()), id: \.offset) { _, char in
-                Text(char).font(.choppyJapanese(size * (chars.count > 1 ? 0.36 : 0.56), weight: .bold))
-            }
-        }
-        .foregroundStyle(.card)
-        .frame(width: size, height: size * (chars.count > 1 ? 1.25 : 1))
-        .background(Color.hanko, in: .rect(cornerRadius: size * 0.14))
-        .rotationEffect(.degrees(-3))
-        .accessibilityHidden(true)
-    }
-}
-
-/// Round wooden button with an SF Symbol, used for back and header actions.
-struct WoodIconButton: View {
-    var systemImage: String
-    var label: LocalizedStringKey
-    var action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemImage)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(.woodDark)
-                .frame(width: 38, height: 38)
-                .background(Color.card, in: .circle)
-                .overlay { Circle().strokeBorder(Color.wood, lineWidth: 1.5) }
-                .paperShadow()
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(label))
-    }
-}
-
-/// A horizontal ink brush stroke: thick in the middle, tapering to dry ends.
-struct BrushStroke: Shape {
-    func path(in rect: CGRect) -> Path {
-        Path { path in
-            let w = rect.width, h = rect.height, mid = rect.midY
-            path.move(to: CGPoint(x: rect.minX, y: mid + h * 0.1))
-            path.addCurve(to: CGPoint(x: rect.minX + w * 0.55, y: rect.minY),
-                          control1: CGPoint(x: rect.minX + w * 0.12, y: mid - h * 0.3),
-                          control2: CGPoint(x: rect.minX + w * 0.3, y: rect.minY))
-            path.addCurve(to: CGPoint(x: rect.maxX, y: mid - h * 0.15),
-                          control1: CGPoint(x: rect.minX + w * 0.8, y: rect.minY),
-                          control2: CGPoint(x: rect.maxX - w * 0.06, y: mid - h * 0.3))
-            path.addCurve(to: CGPoint(x: rect.minX + w * 0.45, y: rect.maxY),
-                          control1: CGPoint(x: rect.maxX - w * 0.1, y: mid + h * 0.2),
-                          control2: CGPoint(x: rect.minX + w * 0.7, y: rect.maxY))
-            path.addCurve(to: CGPoint(x: rect.minX, y: mid + h * 0.1),
-                          control1: CGPoint(x: rect.minX + w * 0.2, y: rect.maxY),
-                          control2: CGPoint(x: rect.minX + w * 0.05, y: mid + h * 0.4))
-            path.closeSubpath()
-        }
-    }
-}
-
 #Preview {
     NavigationStack {
-        ChoppyScreen("Lernen", japanese: "学ぶ") {
+        ChoppyScreen("Wortschatz", subtitle: Text("Woche 3 · Essen und Trinken"), showsBack: true) {
             ScrollView {
-                PaperCard { Text("Inhalt") }.padding()
+                PaperCard { Text("Inhalt") }.padding(Spacing.l)
             }
-        } trailing: {
-            WoodIconButton(systemImage: "gearshape", label: "Einstellungen") {}
         }
     }
 }

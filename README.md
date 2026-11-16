@@ -6,7 +6,7 @@ Two learners study the same weekly vocabulary, kanji and grammar in sync, each w
 
 ## Status
 
-Phase 1 (Foundation) – structure, design system and the content model with kana are in place. See [`CLAUDE.md`](CLAUDE.md) for the full product brief and [`DECISIONS.md`](DECISIONS.md) for architecture decisions.
+Phase 1 (Foundation) – structure, the "Laternengasse" design system and the content model with kana are in place. See [`CLAUDE.md`](CLAUDE.md) for the full product brief and [`DECISIONS.md`](DECISIONS.md) for architecture decisions.
 
 ## Requirements
 
@@ -32,9 +32,13 @@ swift test --package-path Packages/ChoppyCore
 xcodebuild -project choppy.xcodeproj -scheme choppy -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
-## Dialling in the look
+## Design
 
-In the app, open **Wir → Farben & Stil**. Every colour, the background pattern and the accent font can be changed live on the device. "Werte kopieren" or the share button sends the current values, so they can be made the new defaults in `choppy/DesignSystem/Theme/ColorToken.swift`.
+The look follows the Figma file "choppy-local-new" (design direction "Laternengasse": a lantern alley at night). Colour tokens in `choppy/DesignSystem/Theme/ColorToken.swift` are named like the Figma variables. Fonts: Zen Maru Gothic, Yuji Boku, Yuji Syuku and DM Mono (Google Fonts, OFL).
+
+In the app, open **Wir → Farben** to change any colour live on the device. "Werte kopieren" or the share button sends the current values, so they can be made the new defaults in code and in Figma.
+
+Debug builds show the start screen with sample progress when launched with `-sampleProgress YES`.
 
 ## Mascot assets (to be drawn by us)
 

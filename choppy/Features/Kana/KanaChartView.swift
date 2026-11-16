@@ -7,14 +7,10 @@ struct KanaChartView: View {
     @Environment(\.content) private var content
 
     var body: some View {
-        ChoppyScreen("Kana-Tabelle", japanese: script == .hiragana ? "あ" : "ア", showsBack: true) {
+        ChoppyScreen("Kana-Tabelle", subtitle: Text("\(content.kana(script).count) Zeichen"), showsBack: true) {
             ScrollView {
                 VStack(alignment: .leading, spacing: Spacing.l) {
-                    Picker("Schrift", selection: $script) {
-                        Text("Hiragana").tag(KanaItem.Script.hiragana)
-                        Text("Katakana").tag(KanaItem.Script.katakana)
-                    }
-                    .pickerStyle(.segmented)
+                    NorenSwitch(selection: $script, options: [(.hiragana, "Hiragana"), (.katakana, "Katakana")])
 
                     section("Grundzeichen", items: content.kana(script, group: .basic), columns: "aiueo")
                     section("Mit Dakuten ゛ und Handakuten ゜",
@@ -22,14 +18,15 @@ struct KanaChartView: View {
                             columns: "aiueo")
                     section("Kombinationen", items: content.kana(script, group: .combo), columns: "auo")
                 }
-                .padding()
+                .padding(.horizontal, Spacing.l)
+                .padding(.vertical, Spacing.m)
             }
         }
     }
 
     private func section(_ title: LocalizedStringKey, items: [KanaItem], columns: String) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s) {
-            Text(title).font(.choppyHeadline)
+            Text(title).font(.choppyTitle)
             Grid(horizontalSpacing: Spacing.xs, verticalSpacing: Spacing.xs) {
                 ForEach(rows(items), id: \.self) { row in
                     GridRow {
@@ -65,22 +62,26 @@ struct KanaChartView: View {
     }
 }
 
+/// One character on a small sheet of lantern paper.
 private struct KanaCell: View {
     let item: KanaItem
 
     var body: some View {
         VStack(spacing: 0) {
-            Text(item.kana)
-                .font(.choppyJapanese(item.kana.count > 1 ? 22 : 26, weight: .medium))
+            Text(brush: item.kana, size: item.kana.count > 1 ? 22 : 26)
+                .lineLimit(1)
                 .minimumScaleFactor(0.6)
+                .foregroundStyle(.sumi)
             Text(item.romaji)
-                .font(.choppyCaption)
-                .foregroundStyle(.inkSoft)
+                .font(.choppyMono(11))
+                .foregroundStyle(.sugi400)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, Spacing.xs)
-        .background(Color.card, in: .rect(cornerRadius: Radius.s))
-        .overlay { RoundedRectangle(cornerRadius: Radius.s).strokeBorder(Color.woodDark.opacity(0.12)) }
+        .padding(.vertical, 6)
+        .background {
+            Color.washi100.overlay(alignment: .bottom) { Color.washi300.frame(height: 2) }
+                .clipShape(.rect(cornerRadius: Radius.s))
+        }
         .accessibilityElement()
         .accessibilityLabel(Text("\(item.kana), \(item.romaji)"))
     }

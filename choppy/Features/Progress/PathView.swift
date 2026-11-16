@@ -6,23 +6,21 @@ struct PathView: View {
 
     var body: some View {
         NavigationStack {
-            ChoppyScreen("Pfad", japanese: "道") {
+            ChoppyScreen("Pfad", subtitle: Text("Woche für Woche")) {
                 ScrollView {
                     VStack(spacing: Spacing.m) {
-                        PaperCard {
-                            Text("Jede Woche hinterlässt Choppy hier eine neue Fußspur – von unten nach oben.")
-                                .foregroundStyle(.inkSoft)
-                        }
+                        Text("Jede Woche hinterlässt Choppy hier eine neue Fußspur – von unten nach oben.")
+                            .foregroundStyle(.washi300)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         // Placeholder until weekly plans exist (Phase 5).
                         FootprintPath(weeks: 8, completed: 0)
                     }
-                    .padding()
+                    .padding(.horizontal, Spacing.l)
+                    .padding(.vertical, Spacing.m)
                 }
                 .scrollPosition($position)
                 .defaultScrollAnchor(.bottom)
             }
-            // Leaves only along the sides, so the footprint path stays free.
-            .environment(\.backgroundLayout, .framing)
         }
     }
 }

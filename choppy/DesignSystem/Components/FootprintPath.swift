@@ -17,7 +17,7 @@ struct FootprintPath: View {
             let points = (0..<weeks).map { point(for: $0, size: proxy.size) }
             ZStack(alignment: .topLeading) {
                 trail(through: points)
-                    .stroke(Color.woodDark.opacity(0.3), style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [2, 7]))
+                    .stroke(Color.washi300.opacity(0.35), style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [2, 7]))
 
                 ForEach(0..<weeks, id: \.self) { week in
                     footprint(week: week)
@@ -30,7 +30,7 @@ struct FootprintPath: View {
 
                     Text("\(week + 1)")
                         .font(.choppyCaption)
-                        .foregroundStyle(.inkSoft)
+                        .foregroundStyle(.washi300)
                         .position(x: points[week].x + (points[week].x > proxy.size.width / 2 ? -44 : 44), y: points[week].y)
                 }
             }
@@ -73,7 +73,7 @@ struct FootprintPath: View {
     @ViewBuilder
     private func footprint(week: Int) -> some View {
         let isCurrent = week == completed
-        let style: Color = week < completed ? .accent : isCurrent ? .hanko : .inkSoft.opacity(0.25)
+        let style: Color = week < completed ? .momiji300 : isCurrent ? .akari400 : .kasumi.opacity(0.4)
         Group {
             if UIImage(named: "footprint") != nil {
                 Image("footprint").renderingMode(.template).resizable().scaledToFit()

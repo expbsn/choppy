@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "contentVersion": 1,
   "topics": [
-    { "id": "greetings", "title": "Begrüßungen", "japanese": "挨拶", "symbol": "hand.wave" }
+    { "id": "greetings", "title": "Begrüßungen", "japanese": "挨拶", "reading": "あいさつ", "symbol": "hand.wave" }
   ],
   "vocab": [
     { "id": "vocab:choppy:konnichiwa", "surface": "こんにちは", "reading": "こんにちは", "meanings": ["Hallo", "Guten Tag"], "topic": "greetings", "difficulty": 1, "jlpt": 5 },

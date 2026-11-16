@@ -4,6 +4,49 @@
     "%@" : {
 
     },
+    "%@ · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ %@ · %lld Wörter" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ · %3$lld Wörter"
+          }
+        }
+      }
+    },
+    "%@ entfernen" : {
+
+    },
+    "%@ gegen %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ gegen %2$@"
+          }
+        }
+      }
+    },
+    "%@ und %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ und %2$@"
+          }
+        }
+      }
+    },
     "%@, %@" : {
       "localizations" : {
         "de" : {
@@ -14,8 +57,34 @@
         }
       }
     },
+    "%@, was bedeutet das?" : {
+
+    },
     "%lld" : {
 
+    },
+    "%lld : %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld : %2$lld"
+          }
+        }
+      }
+    },
+    "%lld Tage in Folge" : {
+
+    },
+    "%lld von %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld von %2$lld"
+          }
+        }
+      }
     },
     "%lld Wörter" : {
 
@@ -23,58 +92,64 @@
     "%lld Zeichen" : {
 
     },
-    "12 neue Wörter · 3 Kanji" : {
+    "0:%@" : {
+
+    },
+    "1 Wort" : {
 
     },
     "Abgeschlossen: %lld" : {
 
     },
-    "Achtung, Blätter" : {
+    "Abwechselnd an einem Gerät: Wer kennt mehr Wörter der Woche? Pro Frage %lld Sekunden." : {
 
     },
-    "Ahornblatt dunkelbraun" : {
+    "Ahorn – Krone im Licht" : {
 
     },
-    "Ahornblatt hellbraun" : {
+    "Ahorn – Krone im Schatten" : {
 
     },
-    "Ahornblatt rot" : {
+    "Ahornblatt grün, Richtig" : {
 
     },
-    "Akzent – Buttons, Fortschritt" : {
-
-    },
-    "Akzent hell – Markierungen" : {
-
-    },
-    "Akzentschrift" : {
+    "Ahornblatt hellgrün" : {
 
     },
     "Alle Bausteine auf einen Blick" : {
 
     },
-    "Alle Farben, Hintergrund und Schrift zurücksetzen?" : {
+    "Alle Farben zurücksetzen?" : {
+
+    },
+    "Alle Themen" : {
 
     },
     "Alles zurücksetzen" : {
 
     },
-    "Asanoha 麻の葉" : {
+    "App" : {
 
     },
     "Auf Standard zurücksetzen" : {
 
     },
-    "Bambus – Tab-Leiste" : {
-
-    },
-    "Beschriftung" : {
+    "Beschriftung · 12 von 20" : {
 
     },
     "Bilder" : {
 
     },
+    "Buchweizennudeln" : {
+
+    },
     "Buttons" : {
+
+    },
+    "Chōchin-Rot – Laternen, Stempel, Falsch" : {
+
+    },
+    "Chōchin-Rot dunkel – Rippen" : {
 
     },
     "Choppy" : {
@@ -89,38 +164,75 @@
     "Credits & Lizenzen" : {
 
     },
+    "Dachziegel" : {
+
+    },
     "Denkt nach" : {
 
     },
     "Design-Galerie" : {
 
     },
-    "Diese Woche" : {
+    "Deutsch" : {
+
+    },
+    "Deutsch ⇄ Japanisch" : {
+
+    },
+    "Die Namen gelten vorerst nur auf diesem Gerät. Einladen und Abgleich über iCloud folgen." : {
+
+    },
+    "Die Palette live anpassen" : {
+
+    },
+    "Die Übersetzung erscheint hier." : {
 
     },
     "Display" : {
 
     },
-    "Einstellungen" : {
+    "Duell beenden" : {
+
+    },
+    "Duell starten" : {
+
+    },
+    "Duell-Stand" : {
+
+    },
+    "Dunst – ausgeschaltete Laternen" : {
+
+    },
+    "Eingabe löschen" : {
+
+    },
+    "Ergebnis" : {
 
     },
     "Farben" : {
 
     },
-    "Farben & Stil" : {
-
-    },
-    "Farben, Hintergrund und Schrift anpassen" : {
-
-    },
     "Feiert" : {
+
+    },
+    "Fertig" : {
 
     },
     "Feuert an" : {
 
     },
-    "Fließtext in SF Pro" : {
+    "Fließtext in Zen Maru Gothic" : {
 
+    },
+    "Frage %lld von %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Frage %1$lld von %2$lld"
+          }
+        }
+      }
     },
     "Fröhlich" : {
 
@@ -128,37 +240,40 @@
     "Fußspuren-Pfad" : {
 
     },
+    "Gewonnen hat" : {
+
+    },
     "Grundzeichen" : {
 
     },
-    "Herausfordern" : {
+    "Herbstblatt gold" : {
 
     },
-    "Hier ladet ihr euch bald gegenseitig ein und vergleicht eure Fortschritte." : {
+    "Herbstblatt orange" : {
 
     },
-    "Hier tretet ihr bald gegeneinander an." : {
+    "Heute" : {
 
     },
-    "Hintergrund" : {
-
-    },
-    "Hintergrund – Waldgrün" : {
+    "Hinzufügen zu" : {
 
     },
     "Hiragana" : {
 
     },
-    "Holz – Rahmen, Buttons, Blätter" : {
-
-    },
-    "Holz dunkel – Äste, Schatten" : {
-
-    },
     "Hungrig" : {
 
     },
-    "Japanische Schrift (Kana, Kanji, Furigana)" : {
+    "Ihr zwei" : {
+
+    },
+    "Indigo – Himmel, Noren aus" : {
+
+    },
+    "Indigo hell – Horizont, Noren an" : {
+
+    },
+    "Japanisch" : {
 
     },
     "Jede Woche hinterlässt Choppy hier eine neue Fußspur – von unten nach oben." : {
@@ -167,13 +282,7 @@
     "Kana-Tabelle" : {
 
     },
-    "Karten" : {
-
-    },
     "Katakana" : {
-
-    },
-    "Kikkō 亀甲" : {
 
     },
     "Kombinationen" : {
@@ -182,40 +291,104 @@
     "Kopiert ✓" : {
 
     },
-    "Lernen" : {
+    "Laternen, Holztafel und Noren" : {
 
     },
-    "Lernen starten" : {
+    "Laternengasse" : {
+
+    },
+    "Laternengasse · %lld Töne" : {
+
+    },
+    "Laternenlicht" : {
+
+    },
+    "Laternenlicht tief – Schein" : {
+
+    },
+    "Laternenschild" : {
+
+    },
+    "Lernen" : {
 
     },
     "Lerninhalte" : {
 
     },
+    "Lesung" : {
+
+    },
+    "Lesung, änderbar" : {
+
+    },
+    "Letztes Duell %lld : %lld · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Letztes Duell %1$lld : %2$lld · %3$@"
+          }
+        }
+      }
+    },
+    "Meine Kartei" : {
+
+    },
     "Mit Dakuten ゛ und Handakuten ゜" : {
 
     },
-    "Momiji 紅葉" : {
+    "Nach" : {
 
     },
-    "Muster" : {
+    "Nacht – Flächen" : {
 
     },
-    "Musterstärke" : {
+    "Nacht – tiefster Hintergrund" : {
 
     },
-    "Noch keine Spiele" : {
+    "Name" : {
 
     },
-    "Papier dunkel – Flächen, Hügel, Blätter" : {
+    "Noch %lld Sekunden" : {
 
     },
-    "Papierstruktur" : {
+    "Noch ein Duell" : {
+
+    },
+    "Noch kein Duell gespielt. Startet eins unter Spiele." : {
+
+    },
+    "Noch keine Serie" : {
+
+    },
+    "Öffnet die Wörter der Woche" : {
+
+    },
+    "Palette" : {
+
+    },
+    "Papier – Karten" : {
+
+    },
+    "Papier dunkel – Nebentext auf Nacht" : {
+
+    },
+    "Papier hell – Text auf Nacht, Laternenpapier" : {
+
+    },
+    "Papier und Zeilen" : {
 
     },
     "Pfad" : {
 
     },
-    "Richtig" : {
+    "Pinselschrift für Hiragana und Katakana" : {
+
+    },
+    "Pinselschrift für Kanji" : {
+
+    },
+    "Richtung tauschen" : {
 
     },
     "Satt" : {
@@ -224,25 +397,22 @@
     "Schläft" : {
 
     },
-    "Schlicht" : {
-
-    },
     "Schrift" : {
 
     },
     "Schriften" : {
 
     },
-    "Seigaiha 青海波" : {
-
-    },
-    "Shippō 七宝" : {
-
-    },
     "Später" : {
 
     },
     "Spiele" : {
+
+    },
+    "Spieler 1" : {
+
+    },
+    "Spieler 2" : {
 
     },
     "Sprachausgabe" : {
@@ -257,22 +427,19 @@
     "Stempel entfernen" : {
 
     },
-    "Stempel-Zinnober" : {
-
-    },
     "Stempeln" : {
 
     },
     "Stimmung" : {
 
     },
-    "Themen" : {
+    "Tauscht die Richtung" : {
 
     },
-    "Tinte – Text, Konturen" : {
+    "Thema der Woche: %@" : {
 
     },
-    "Tinte hell – Nebentext" : {
+    "Thema: %@" : {
 
     },
     "Titel" : {
@@ -281,16 +448,49 @@
     "Traurig" : {
 
     },
-    "Typografie" : {
+    "Tusche – Text auf Papier, Konturen" : {
 
     },
     "Überschrift" : {
 
     },
-    "Überschriften und Akzente" : {
+    "Überschriften, Texte und japanische Lesungen" : {
 
     },
-    "Überschriften, Buttons und Beschriftungen. Japanisch bleibt in Noto Sans JP." : {
+    "Übersetze …" : {
+
+    },
+    "Übersetzen" : {
+
+    },
+    "Übersetzer" : {
+
+    },
+    "Übersetzer öffnen" : {
+
+    },
+    "Unentschieden" : {
+
+    },
+    "Unsere Wörter" : {
+
+    },
+    "Vokabelduell" : {
+
+    },
+    "Von" : {
+
+    },
+    "Vorerst auf diesem Gerät gespeichert, noch ohne Abgleich und noch nicht in den Lernkarten." : {
+
+    },
+    "Wasser" : {
+
+    },
+    "Weiter lernen" : {
+
+    },
+    "Weitere Spiele folgen: Memory, Wordle, Shiritori." : {
 
     },
     "Werte kopieren" : {
@@ -299,11 +499,18 @@
     "Werte teilen" : {
 
     },
-    "Willkommen! Fangt mit den Kana an." : {
-
-    },
     "Wir" : {
 
+    },
+    "Woche %lld · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Woche %1$lld · %2$@"
+          }
+        }
+      }
     },
     "Woche %lld von %lld" : {
       "localizations" : {
@@ -315,7 +522,46 @@
         }
       }
     },
+    "Woche für Woche" : {
+
+    },
+    "Wort des Tages" : {
+
+    },
+    "Wort oder kurzer Satz" : {
+
+    },
+    "Wort übersetzen und hinzufügen" : {
+
+    },
+    "Wörter" : {
+
+    },
+    "Wörter der Woche" : {
+
+    },
+    "Wörter nur für dich erscheinen hier." : {
+
+    },
+    "Wörter, die ihr beide lernt, erscheinen hier." : {
+
+    },
     "z" : {
+
+    },
+    "Zahlen und kleine Beschriftungen" : {
+
+    },
+    "Zeder – Kanten" : {
+
+    },
+    "Zeder dunkel – Balken, Planken" : {
+
+    },
+    "Zeder hell – Rahmen, Nebentext auf Papier" : {
+
+    },
+    "Zu zweit gegeneinander" : {
 
     },
     "Zurück" : {
@@ -327,10 +573,10 @@
     "いただきます・日本語" : {
 
     },
-    "いらっしゃいませ！" : {
+    "そば" : {
 
     },
-    "こんにちは" : {
+    "みず" : {
 
     }
   },

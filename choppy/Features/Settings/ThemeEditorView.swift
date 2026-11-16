@@ -1,111 +1,57 @@
 import SwiftUI
 import UIKit
 
-/// "Farben & Stil": dial in colours, background and accent font live on the device.
-/// Changes apply everywhere immediately; "Werte teilen" sends the current values
-/// so they can be made the new defaults in code.
+/// "Farben": dial in the palette live on the device.
+/// Changes apply everywhere immediately; "Werte teilen" at the bottom sends the current values
+/// so they can be made the new defaults in code and in the Figma variables.
 struct ThemeEditorView: View {
-    @Bindable private var theme = ThemeStore.shared
+    private let theme = ThemeStore.shared
     @State private var copied = false
     @State private var confirmReset = false
 
     var body: some View {
-        ChoppyScreen("Farben & Stil", japanese: "色", showsBack: true) {
+        ChoppyScreen("Farben", subtitle: Text("Laternengasse · \(ColorToken.allCases.count) Töne"), showsBack: true) {
             ScrollView {
                 VStack(alignment: .leading, spacing: Spacing.l) {
                     preview
-                    backgroundSection
-                    fontSection
-                    colorSection
-                    actions
-                }
-                .padding()
-            }
-        } trailing: {
-            ShareLink(item: theme.exportText) {
-                Image(systemName: "square.and.arrow.up")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.woodDark)
-                    .frame(width: 38, height: 38)
-                    .background(Color.card, in: .circle)
-                    .overlay { Circle().strokeBorder(Color.wood, lineWidth: 1.5) }
-            }
-            .accessibilityLabel(Text("Werte teilen"))
-        }
-    }
-
-    // MARK: Sections
-
-    private var preview: some View {
-        PaperCard {
-            HStack(alignment: .top, spacing: Spacing.m) {
-                VStack(alignment: .leading, spacing: Spacing.xs) {
-                    Text("Diese Woche").font(.choppyTitle)
-                    Text("12 neue Wörter · 3 Kanji").foregroundStyle(.inkSoft)
-                    Text("こんにちは").font(.choppyJapanese(22, weight: .bold))
-                    HStack {
-                        Button("Lernen") {}.buttonStyle(.ink(.primary))
-                        Button("Später") {}.buttonStyle(.ink(.secondary))
-                    }
-                }
-                Spacer(minLength: 0)
-                VStack(spacing: Spacing.s) {
-                    ChoppyView(mood: .happy, size: 64)
-                    HankoStamp(text: "合格", size: 48)
-                }
-            }
-        }
-    }
-
-    private var backgroundSection: some View {
-        section("Hintergrund") {
-            LazyVGrid(columns: Array(repeating: GridItem(spacing: Spacing.xs), count: 3), spacing: Spacing.xs) {
-                ForEach(BackgroundStyle.allCases) { style in
-                    let isSelected = theme.settings.background == style
-                    Button { theme.settings.background = style } label: {
-                        VStack(spacing: Spacing.xxs) {
-                            ZStack {
-                                Color.paper
-                                BackgroundPatternView(style: style, scale: 0.6)
-                                    .opacity(max(theme.settings.patternOpacity, 0.35))
+                    VStack(alignment: .leading, spacing: Spacing.xs) {
+                        Text("Palette").font(.choppyTitle)
+                        PaperCard {
+                            VStack(spacing: Spacing.s) {
+                                ForEach(ColorToken.allCases) { token in
+                                    ColorTokenRow(token: token, theme: theme)
+                                    if token != ColorToken.allCases.last {
+                                        Color.sumi.opacity(0.15).frame(height: 1)
+                                    }
+                                }
                             }
-                            .frame(height: 64)
-                            .clipShape(.rect(cornerRadius: Radius.s))
-                            .overlay {
-                                RoundedRectangle(cornerRadius: Radius.s)
-                                    .strokeBorder(isSelected ? Color.accent : Color.woodDark.opacity(0.15), lineWidth: isSelected ? 2.5 : 1)
-                            }
-                            Text(style.title).font(.caption2).lineLimit(1).minimumScaleFactor(0.7)
                         }
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityAddTraits(isSelected ? .isSelected : [])
+                    actions
                 }
+                .padding(.horizontal, Spacing.l)
+                .padding(.vertical, Spacing.m)
             }
-            labeledSlider("Musterstärke", value: $theme.settings.patternOpacity, in: 0.05...1)
-            labeledSlider("Papierstruktur", value: $theme.settings.paperTexture, in: 0...1)
         }
     }
 
-    private var fontSection: some View {
-        section("Akzentschrift") {
-            Picker("Akzentschrift", selection: $theme.settings.accentFont) {
-                ForEach(AccentFontFamily.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            Text("Überschriften, Buttons und Beschriftungen. Japanisch bleibt in Noto Sans JP.")
-                .font(.footnote)
-                .foregroundStyle(.inkSoft)
-        }
-    }
-
-    private var colorSection: some View {
-        section("Farben") {
-            VStack(spacing: Spacing.m) {
-                ForEach(ColorToken.allCases) { token in
-                    ColorTokenRow(token: token, theme: theme)
-                    if token != ColorToken.allCases.last { Divider() }
+    private var preview: some View {
+        VStack(alignment: .leading, spacing: Spacing.s) {
+            PaperCard(padding: Spacing.m) {
+                HStack(spacing: Spacing.m) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Wort des Tages").font(.choppyCaption).foregroundStyle(.sugi400)
+                        Text(brush: "蕎麦", size: 28)
+                        Text("Buchweizennudeln").font(.choppyFootnote)
+                    }
+                    Spacer(minLength: 0)
+                    Button("Lernen") {}.buttonStyle(.choppy(.ink))
                 }
+            }
+            HStack(spacing: Spacing.m) {
+                ChochinCounter(lit: 4)
+                Spacer(minLength: 0)
+                Button("Später") {}.buttonStyle(.choppy(.plank))
             }
         }
     }
@@ -116,39 +62,24 @@ struct ThemeEditorView: View {
                 UIPasteboard.general.string = theme.exportText
                 copied = true
             }
-            .buttonStyle(.ink(.primary, fullWidth: true))
+            .buttonStyle(.choppy(.paper, fullWidth: true))
             .sensoryFeedback(.success, trigger: copied) { _, new in new }
 
+            ShareLink(item: theme.exportText) {
+                Label("Werte teilen", systemImage: "square.and.arrow.up").frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.choppy(.plank, fullWidth: true))
+
             Button("Alles zurücksetzen", role: .destructive) { confirmReset = true }
-                .buttonStyle(.ink(.quiet))
-                .confirmationDialog("Alle Farben, Hintergrund und Schrift zurücksetzen?",
-                                    isPresented: $confirmReset, titleVisibility: .visible) {
+                .buttonStyle(.choppy(.plank, fullWidth: true))
+                .confirmationDialog("Alle Farben zurücksetzen?", isPresented: $confirmReset, titleVisibility: .visible) {
                     Button("Zurücksetzen", role: .destructive) { theme.resetAll() }
                 }
-        }
-        .frame(maxWidth: .infinity)
-    }
-
-    // MARK: Helpers
-
-    private func section(_ title: LocalizedStringKey, @ViewBuilder content: () -> some View) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.xs) {
-            Text(title).font(.choppyHeadline)
-            PaperCard {
-                VStack(alignment: .leading, spacing: Spacing.s) { content() }
-            }
-        }
-    }
-
-    private func labeledSlider(_ title: LocalizedStringKey, value: Binding<Double>, in range: ClosedRange<Double>) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title).font(.subheadline)
-            Slider(value: value, in: range)
         }
     }
 }
 
-/// One colour: picker, hex value, the reference palette as suggestions and a reset button.
+/// One colour: picker, hex value, the palette as suggestions and a reset button.
 private struct ColorTokenRow: View {
     let token: ColorToken
     let theme: ThemeStore
@@ -160,9 +91,9 @@ private struct ColorTokenRow: View {
                                                set: { theme.setColor($0, for: token) }),
                             supportsOpacity: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(token.rawValue).font(.choppyHeadline)
-                        Text(token.role).font(.caption).foregroundStyle(.inkSoft)
-                        Text(theme.hex(for: token)).font(.caption.monospaced()).foregroundStyle(.inkSoft)
+                        Text(token.figmaName).font(.choppyHeadline)
+                        Text(token.role).font(.choppyFootnote).foregroundStyle(.sugi400)
+                        Text(theme.hex(for: token)).font(.choppyCaption).foregroundStyle(.sugi400)
                     }
                 }
                 if theme.isCustomized(token) {
@@ -170,25 +101,24 @@ private struct ColorTokenRow: View {
                         Image(systemName: "arrow.uturn.backward.circle.fill").font(.title3)
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(.wood)
+                    .foregroundStyle(.sugi400)
                     .accessibilityLabel(Text("Auf Standard zurücksetzen"))
                 }
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: Spacing.xs) {
                     ForEach(token.suggestions, id: \.self) { suggestion in
+                        let isCurrent = theme.hex(for: token) == suggestion.hex
                         Button { theme.setHex(suggestion.hex, for: token) } label: {
                             HStack(spacing: Spacing.xxs) {
-                                Circle().fill(Color(hex: suggestion.hex)).frame(width: 16, height: 16)
-                                    .overlay { Circle().strokeBorder(Color.ink.opacity(0.15)) }
-                                Text(suggestion.name).font(.caption)
+                                Color(hex: suggestion.hex).frame(width: 14, height: 14)
+                                    .border(Color.sumi.opacity(0.3), width: 1)
+                                Text(suggestion.name).font(.choppyCaption)
                             }
                             .padding(.horizontal, Spacing.xs)
                             .padding(.vertical, Spacing.xxs)
-                            .background(Color.paper, in: .capsule)
-                            .overlay {
-                                Capsule().strokeBorder(theme.hex(for: token) == suggestion.hex ? Color.accent : Color.woodDark.opacity(0.15))
-                            }
+                            .background(Color.washi50)
+                            .border(isCurrent ? Color.sumi : Color.sumi.opacity(0.15), width: isCurrent ? 1.5 : 1)
                         }
                         .buttonStyle(.plain)
                     }
