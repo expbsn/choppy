@@ -158,6 +158,7 @@ Games pull from the current week's content and each user's weak items.
 - CloudKit + push (`remote-notification`) capabilities are enabled in the entitlements. Planned iCloud container: `iCloud.chop.app.choppy`.
 - Fonts (registered via `UIAppFonts`, in `choppy/Resources/Fonts/`, static files from Google Fonts): **Zen Maru Gothic** Regular and Medium (`ZenMaruGothic-<Weight>`, interface and Japanese readings), **Yuji Boku** (`YujiBoku-Regular`, kanji in brush lettering), **Yuji Syuku** (`YujiSyuku-Regular`, kana in brush lettering), **DM Mono** Regular and Medium (`DMMono-<Weight>`, counts and captions).
 - iPhone only, portrait only.
+- **GitHub:** `expbsn/choppy` is **public** since 2026-11-16 (was private). Never commit secrets, API keys or personal data; keys go in an untracked `Secrets.xcconfig`.
 - **Confirmed decisions (2026-10-30):** German UI (development region `de`, String Catalog). Paid developer account. Both devices support Apple Intelligence. Kokoro TTS is **bundled** in the app.
 - **Architecture:** see `DECISIONS.md`. In short: SwiftData (private) + CKSyncEngine with a zone-wide CKShare (pair space). Pure logic lives in the local package `Packages/ChoppyCore`. FSRS-6 is our own implementation. No third-party packages.
 - **Layout:** `choppy/{App, DesignSystem, Features, Persistence, Services, Resources}`, `Packages/ChoppyCore`, `Tools/ContentPipeline` (planned).
